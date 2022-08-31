@@ -1,8 +1,20 @@
 fileFormatVersion: 2
-guid: fe9493fac7fce1f4fa6d3cf6ee6f9cc0
+guid: f6ec10ff206278b4aa8c036f01c565fa
 ModelImporter:
   serializedVersion: 22103
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 8495593197186102087
+    second: Top.001-Rig|Top
+  - first:
+      74: 9137157284291896791
+    second: Top.004-Rig|Top
+  - first:
+      74: 2793853603602443897
+    second: Top.003-Rig|Top
+  - first:
+      74: 3957859917712931053
+    second: Top.002-Rig|Top
   externalObjects: {}
   materials:
     materialImportMode: 2

@@ -49,6 +49,7 @@ public class Obstacle : MonoBehaviour
             }
             else
             {
+                //if (rb.angularVelocity.magnitude < torque / 3 * Time.fixedDeltaTime) torqueVector *= -1; 
                 rb.angularVelocity = (torqueVector * torque * Time.fixedDeltaTime);
             }
 
@@ -129,7 +130,7 @@ public class Obstacle : MonoBehaviour
             state = 1;
             yield break;
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.2f);
         state = 1;
     }
     IEnumerator goTwo()
