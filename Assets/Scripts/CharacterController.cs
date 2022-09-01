@@ -4,14 +4,18 @@ using UnityEngine.UI;
 
 public class CharacterController : MonoBehaviour
 {
+    [Header("Input")]
     [SerializeField]
     private Joystick joystick;
 
+    [Space(10)]
+    [Header("Movement")]
     public float movementSpeed = 10f;
     public float maxSpeed = 15f;
     public float jumpSpeed = 15f;
+    private Vector3 moveDirection;
 
-    public float doubleClickTime = 0.1f;
+    private float doubleClickTime = 0.2f;
     private bool isDoubleClick = false;
 
     private Rigidbody rb;
@@ -22,7 +26,16 @@ public class CharacterController : MonoBehaviour
 
     private Animator animator;
 
+    [Space(10)]
+    [Header("Location Slider")]
     public Slider locationSlider;
+
+    [Space(10)]
+    [Header("Slope Handling")]
+    public float cornerClimbForce;
+    public Transform cornerRaycastPos;
+    private RaycastHit cornerHit;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -44,16 +57,26 @@ public class CharacterController : MonoBehaviour
         {
             animator.SetBool("isRunning", true);
             Vector3 direction = Vector3.forward * -vertical + Vector3.right * -horizontal;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.07f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.15f);
 
+            moveDirection = new Vector3(horizontal, 0, vertical);
             //if (stunned) return;
 
             //rb.MovePosition(transform.position + new Vector3(horizontal, 0, vertical).normalized * movementSpeed * Time.deltaTime);
 
-            rb.AddForce(new Vector3(horizontal, 0, vertical).normalized * movementSpeed * Time.deltaTime, ForceMode.Acceleration);
+            if (Physics.Raycast(cornerRaycastPos.position, cornerRaycastPos.TransformDirection(Vector3.back), out cornerHit, transform.localScale.x * 1.3f))
+            {
+                Debug.DrawRay(cornerRaycastPos.position, cornerRaycastPos.TransformDirection(Vector3.back), Color.red, 25f);
+                Debug.Log(cornerHit.collider.name);
+            }
 
-            //Vector3 addPos = new Vector3(horizontal, 0, vertical).normalized * movementSpeed * Time.deltaTime;
-            //transform.position += (addPos);
+            if (OnCorner())
+            {
+                rb.AddForce(new Vector3(0, 1, 0) * cornerClimbForce * Time.deltaTime, ForceMode.Acceleration);
+            }
+
+                rb.AddForce(new Vector3(horizontal, 0, vertical).normalized * movementSpeed * Time.deltaTime, ForceMode.Acceleration);
+
         }
         else
         {
@@ -67,14 +90,7 @@ public class CharacterController : MonoBehaviour
 
         if (transform.position.y < -10) Death();
 
-        if (Mathf.Abs(rb.velocity.x) > 5f || Mathf.Abs(rb.velocity.z) > 5f)
-        {
-            stunned = true;
-        }
-        else
-        {
-            stunned = false;
-        }
+        if (transform.position.z > GameObject.FindGameObjectWithTag("Finish").transform.position.z) animator.SetBool("dance", true);
 
         if (Input.touchCount > 0)
         {
@@ -146,4 +162,16 @@ public class CharacterController : MonoBehaviour
         transform.position = lastCheckpoint.transform.position;
         FindObjectOfType<CameraController>().transform.position = lastCheckpoint.transform.position + FindObjectOfType<CameraController>().GetComponent<CameraController>().offset;
     }
+
+    private bool OnCorner()
+    {
+        if (Physics.Raycast(cornerRaycastPos.position, cornerRaycastPos.TransformDirection(Vector3.back), out cornerHit, 25f))
+        {
+            Debug.DrawRay(cornerRaycastPos.position, cornerRaycastPos.TransformDirection(Vector3.back), Color.red, 25f);
+            return true;
+        }
+
+        return false;
+    }
+
 }
