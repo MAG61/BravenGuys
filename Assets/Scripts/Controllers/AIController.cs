@@ -2,9 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class AIController : Player
 {
+    #region Names
+    private string[] names = {"Harry", "Ross",
+                        "Bruce", "Cook",
+                        "Carolyn", "Morgan",
+                        "Albert", "Walker",
+                        "Randy", "Reed",
+                        "Larry", "Barnes",
+                        "Lois", "Wilson",
+                        "Jesse", "Campbell",
+                        "Ernest", "Rogers",
+                        "Theresa", "Patterson",
+                        "Henry", "Simmons",
+                        "Michelle", "Perry",
+                        "Frank", "Butler",
+                        "Shirley", "Brooks",
+                    "Rachel","Edwards",
+                    "Christopher","Perez",
+                    "Thomas","Baker",
+                    "Sara","Moore",
+                    "Chris","Bailey",
+                    "Roger","Johnson",
+                    "Marilyn","Thompson",
+                    "Anthony","Evans",
+                    "Julie","Hall",
+                    "Paula","Phillips",
+                    "Annie","Hernandez",
+                    "Dorothy","Murphy",
+                    "Alice","Howard"};
+
+    #endregion
+
     public List<GameObject> destinations = new();
     private GameObject currentDestination;
 
@@ -12,9 +44,9 @@ public class AIController : Player
     public GameObject AIObject;
 
     [Space(10)]
-    [Header("Nav Mesh")]
-    private NavMeshAgent agent;
-    public Transform target;
+    [Header("Name")]
+    public string userName;
+    public TextMeshPro nameText;
 
     private void Awake()
     {
@@ -23,10 +55,12 @@ public class AIController : Player
 
     private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        //agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
+        userName = names[Random.Range(0, names.Length)] + Random.Range(0,999);
+        nameText.text = userName;
     }
     private void FixedUpdate()
     {
@@ -59,7 +93,11 @@ public class AIController : Player
 
     void Update()
     {
-        if (transform.position.y < -10) transform.position = lastCheckpoint.transform.position;
+        if (transform.position.y < -10 && lastCheckpoint != null) transform.position = lastCheckpoint.transform.position;
+
+        CheckFinish();
+        nameText.transform.LookAt(GameObject.Find("PlayerCamera(Clone)").transform);
+
         // Destination
         List<GameObject> foreDests = new();
         foreach (GameObject dest in destinations)
@@ -90,6 +128,8 @@ public class AIController : Player
 
     public void FindDests()
     {
+        destinations.Clear();
+
         foreach (GameObject dest in GameObject.FindGameObjectsWithTag("Destination"))
         {
             destinations.Add(dest);

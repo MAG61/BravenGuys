@@ -9,7 +9,7 @@ TagManager:
   - Checkpoint
   - DeadArea
   - Start
-  - Fin
+  - CamJoystick
   layers:
   - Default
   - TransparentFX

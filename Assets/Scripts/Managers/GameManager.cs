@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public enum Phase { Start, SemiFinal, Final }
+    public Phase phase;
+
     public CharacterController Player;
-    public List<AI> bots = new();
+    public List<Player> bots = new();
     public MapManager currentMap;
 
     public static GameManager instance;
@@ -27,20 +30,30 @@ public class GameManager : MonoBehaviour
         if (Player == null) return;
         if (SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "RandomMap")
         {
-            foreach (AI bot in bots)
+            foreach (Player bot in bots)
             {
                 bot.gameObject.SetActive(false);
             }
             Player.gameObject.SetActive(false);
         }
+        else
+        {
+            foreach (Player bot in bots)
+            {
+                bot.gameObject.SetActive(true);
+            }
+            Player.gameObject.SetActive(true);
+        }
     }
 
     public void StartGame()
     {
+        phase = Phase.Start;
+
         for (int i = 0; i < 15; i++)
         {
             GameObject bot = Instantiate(Resources.Load("Prefabs/AI") as GameObject);
-            bots.Add(bot.GetComponent<AI>());
+            bots.Add(bot.GetComponent<Player>());
         }
 
         GameObject player = Instantiate(Resources.Load("Prefabs/Player") as GameObject);
@@ -53,9 +66,10 @@ public class GameManager : MonoBehaviour
     {
         GetCurrentMap();
 
-        foreach (AI bot in bots)
+        foreach (Player bot in bots)
         {
             bot.gameObject.SetActive(true);
+            bot.GetComponent<AIController>().FindDests();
         }
         Player.gameObject.SetActive(true);
 
@@ -69,7 +83,6 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < bots.Count; i++)
         {
             bots[i].transform.position = currentMap.spawnPoints[i + 1].position;
-            bots[i].GetComponent<AIController>().FindDests();
         }
     }
 
@@ -78,7 +91,7 @@ public class GameManager : MonoBehaviour
         currentMap = GameObject.Find("MapManager").GetComponent<MapManager>();
     }
 
-    public void RemoveBot(AI bot) { bots.Remove(bot); }
+    public void RemoveBot(Player bot) { if (bots.Contains(bot)) bots.Remove(bot); }
 
     public void SelectRandomMap() { SceneManager.LoadScene("RandomMap"); }
 
@@ -89,5 +102,53 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         StartGame();
+    }
+
+    public void MapEnd(List<Player> qualifieds)
+    {
+        if (phase != Phase.Final)
+        {
+            foreach (Player bot in bots)
+            {
+                bot.gameObject.SetActive(false);
+            }
+            Player.gameObject.SetActive(false);
+
+            if (qualifieds.Contains(Player.GetComponent<Player>()))
+            {
+                qualifieds.Remove(Player.GetComponent<Player>());
+            }
+            else
+            {
+                GameEnd();
+            }
+            //for (int i = 0; i < bots.Count; i++)
+            //{
+            //    if (!qualifieds.Contains(bots[i]))
+            //    {
+            //        RemoveBot(bots[i]);
+            //        Destroy(bots[i].gameObject);
+            //    }
+            //}
+            foreach (Player bot in bots)
+            {
+                if (!qualifieds.Contains(bot))
+                {
+                    Destroy(bot.gameObject);
+                }
+            }
+
+            bots = qualifieds;
+
+            if (phase == Phase.Start) phase = Phase.SemiFinal;
+            else if (phase == Phase.SemiFinal) phase = Phase.Final;
+
+            SelectRandomMap();
+        }
+    }
+
+    public void GameEnd()
+    {
+
     }
 }

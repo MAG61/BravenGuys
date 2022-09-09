@@ -25,6 +25,11 @@ public class Player : MonoBehaviour
     public Transform cornerRaycastPos;
     public RaycastHit cornerHit;
 
+    private void Update()
+    {
+
+    }
+
     public void Jump()
     {
         animator.SetTrigger("jump");
@@ -73,7 +78,13 @@ public class Player : MonoBehaviour
         StartCoroutine(reloadStunn());
     }
 
-
+    public void CheckFinish()
+    {
+        if (transform.position.z > GameObject.FindGameObjectWithTag("Finish").transform.position.z)
+        {
+            GameObject.Find("MapManager").GetComponent<MapManager>().Qualify(this);
+        }
+    }
 
     IEnumerator reloadStunn()
     {
