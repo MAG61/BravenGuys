@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public CharacterController Player;
     public List<Player> bots = new();
     public MapManager currentMap;
+    private List<Player> qualifieds = new();
 
     public static GameManager instance;
 
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour
         Player.gameObject.SetActive(true);
 
         Player.transform.position = currentMap.spawnPoints[0].position;
-        Player.FindRequirements();
+
 
         GameObject playerCamera = Instantiate(Resources.Load("Prefabs/PlayerCamera") as GameObject);
         playerCamera.transform.position = Player.transform.position + playerCamera.GetComponent<CameraController>().offset;
@@ -84,6 +85,8 @@ public class GameManager : MonoBehaviour
         {
             bots[i].transform.position = currentMap.spawnPoints[i + 1].position;
         }
+
+        Player.FindRequirements();
     }
 
     public void GetCurrentMap()
@@ -106,14 +109,34 @@ public class GameManager : MonoBehaviour
 
     public void MapEnd(List<Player> qualifieds)
     {
+        this.qualifieds = qualifieds;
+        SceneManager.LoadScene("Elimination");
+    }
+
+    public void EliminateRquirements()
+    {
+        foreach (Player bot in bots)
+        {
+            bot.gameObject.SetActive(true);
+            bot.GetComponent<AIController>().enabled = false;
+            bot.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            bot.transform.position = Vector3.zero;
+            bot.transform.LookAt(new Vector3(0, -5, -17));
+            bot.GetComponent<AIController>().nameText.transform.LookAt(new Vector3(0, 40, 17));
+        }
+        Player.gameObject.SetActive(true);
+        Player.GetComponent<CharacterController>().enabled = false;
+        Player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Player.transform.position = Vector3.zero;
+        Player.transform.LookAt(new Vector3(0, -5, -17));
+
+        GameObject.Find("EliminationManager").GetComponent<EliminationManager>().Eliminate(bots, qualifieds, Player);
+    }
+
+    public void Eliminate(List<Player> qualifieds)
+    {
         if (phase != Phase.Final)
         {
-            foreach (Player bot in bots)
-            {
-                bot.gameObject.SetActive(false);
-            }
-            Player.gameObject.SetActive(false);
-
             if (qualifieds.Contains(Player.GetComponent<Player>()))
             {
                 qualifieds.Remove(Player.GetComponent<Player>());
@@ -122,14 +145,6 @@ public class GameManager : MonoBehaviour
             {
                 GameEnd();
             }
-            //for (int i = 0; i < bots.Count; i++)
-            //{
-            //    if (!qualifieds.Contains(bots[i]))
-            //    {
-            //        RemoveBot(bots[i]);
-            //        Destroy(bots[i].gameObject);
-            //    }
-            //}
             foreach (Player bot in bots)
             {
                 if (!qualifieds.Contains(bot))
@@ -140,11 +155,21 @@ public class GameManager : MonoBehaviour
 
             bots = qualifieds;
 
+            foreach (Player bot in bots)
+            {
+                bot.GetComponent<AIController>().enabled = true;
+                bot.gameObject.SetActive(false);
+            }
+            Player.GetComponent<CharacterController>().enabled = true;
+            Player.gameObject.SetActive(false);
+
             if (phase == Phase.Start) phase = Phase.SemiFinal;
             else if (phase == Phase.SemiFinal) phase = Phase.Final;
 
             SelectRandomMap();
         }
+
+
     }
 
     public void GameEnd()

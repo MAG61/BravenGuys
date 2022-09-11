@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -24,11 +25,6 @@ public class Player : MonoBehaviour
     public float cornerClimbForce;
     public Transform cornerRaycastPos;
     public RaycastHit cornerHit;
-
-    private void Update()
-    {
-
-    }
 
     public void Jump()
     {
@@ -80,9 +76,10 @@ public class Player : MonoBehaviour
 
     public void CheckFinish()
     {
-        if (transform.position.z > GameObject.FindGameObjectWithTag("Finish").transform.position.z)
+        if (SceneManager.GetActiveScene().name != "Elimination" && SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "RandomMap")
         {
-            GameObject.Find("MapManager").GetComponent<MapManager>().Qualify(this);
+            if (transform.position.z > GameObject.FindGameObjectWithTag("Finish").transform.position.z)
+                GameObject.Find("MapManager").GetComponent<MapManager>().Qualify(this);
         }
     }
 

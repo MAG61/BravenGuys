@@ -6914,6 +6914,7 @@ GameObject:
   - component: {fileID: 6791452423759753588}
   - component: {fileID: 6791452423759753591}
   - component: {fileID: 6791452423759753590}
+  - component: {fileID: 1072719265663412771}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -7019,6 +7020,18 @@ MonoBehaviour:
   cornerRaycastPos: {fileID: 6791452423429714717}
   joystick: {fileID: 0}
   locationSlider: {fileID: 0}
+--- !u!114 &1072719265663412771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5945169522775028486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c83db3aa30e280342a953057f4e4ac0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5972729561708599392
 GameObject:
   m_ObjectHideFlags: 0

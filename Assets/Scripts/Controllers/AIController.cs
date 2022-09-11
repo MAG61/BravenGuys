@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class AIController : Player
 {
@@ -59,11 +60,12 @@ public class AIController : Player
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
-        userName = names[Random.Range(0, names.Length)] + Random.Range(0,999);
+        userName = names[Random.Range(0, names.Length)] + Random.Range(0, 999);
         nameText.text = userName;
     }
     private void FixedUpdate()
     {
+        if (SceneManager.GetActiveScene().name == "Elimination" || SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "RandomMap") return;
         rb.maxLinearVelocity = maxSpeed;
 
         if (currentDestination == null) return;
@@ -93,6 +95,7 @@ public class AIController : Player
 
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == "Elimination" || SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "RandomMap") return;
         if (transform.position.y < -10 && lastCheckpoint != null) transform.position = lastCheckpoint.transform.position;
 
         CheckFinish();

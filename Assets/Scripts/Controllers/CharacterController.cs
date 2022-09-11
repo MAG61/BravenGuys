@@ -32,13 +32,13 @@ public class CharacterController : Player
             if (col.sharedMaterial == ignore) Physics.IgnoreCollision(GetComponent<Collider>(), col, true);
         }
 
-        joystick = GameObject.Find("FloatingJoystick").GetComponent<Joystick>();
+        //joystick = GameObject.Find("FloatingJoystick").GetComponent<Joystick>();
 
-        locationSlider = GameObject.Find("LocaitonSlider").GetComponent<Slider>();
-        locationSlider.minValue = GameObject.FindGameObjectWithTag("Start").transform.position.z;
-        locationSlider.maxValue = GameObject.FindGameObjectWithTag("Finish").transform.position.z;
+        //locationSlider = GameObject.Find("LocaitonSlider").GetComponent<Slider>();
+        //locationSlider.minValue = GameObject.FindGameObjectWithTag("Start").transform.position.z;
+        //locationSlider.maxValue = GameObject.FindGameObjectWithTag("Finish").transform.position.z;
 
-        cameraCont = GameObject.Find("PlayerCamera").GetComponent<CameraController>();
+        //cameraCont = GameObject.Find("PlayerCamera").GetComponent<CameraController>();
     }
 
     private void FixedUpdate()
@@ -139,6 +139,6 @@ public class CharacterController : Player
         locationSlider.minValue = GameObject.FindGameObjectWithTag("Start").transform.position.z;
         locationSlider.maxValue = GameObject.FindGameObjectWithTag("Finish").transform.position.z;
 
-        cameraCont = GameObject.Find("PlayerCamera").GetComponent<CameraController>();
+        cameraCont = GameObject.Find("PlayerCamera(Clone)").GetComponent<CameraController>();
     }
 }

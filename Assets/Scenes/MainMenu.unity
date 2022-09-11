@@ -867,6 +867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d180c93a9f6ab8e43922913f65c28d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phase: 0
   Player: {fileID: 0}
   bots: []
   currentMap: {fileID: 0}
