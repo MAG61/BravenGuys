@@ -96,7 +96,27 @@ public class GameManager : MonoBehaviour
 
     public void RemoveBot(Player bot) { if (bots.Contains(bot)) bots.Remove(bot); }
 
+    public void GoMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+
+        foreach (Player bot in bots)
+        {
+            Destroy(bot.gameObject);
+        }
+        if (Player != null) Destroy(Player.gameObject);
+
+        qualifieds.Clear();
+        bots.Clear();
+        currentMap = null;
+        Player = null;
+    }
+
     public void SelectRandomMap() { SceneManager.LoadScene("RandomMap"); }
+
+    public void LoserScreen() { SceneManager.LoadScene("Loser"); }
+
+    public void WinnerScreen() { SceneManager.LoadScene("Winner"); }
 
     public void SetMap(string map) { SceneManager.LoadScene(map); }
 
@@ -135,7 +155,33 @@ public class GameManager : MonoBehaviour
 
     public void Eliminate(List<Player> qualifieds)
     {
-        if (phase != Phase.Final)
+        if (phase == Phase.Final)
+        {
+            if (!qualifieds.Contains(Player.GetComponent<Player>()))
+            {
+                Destroy(Player.gameObject);
+                Player = null;
+            }
+            foreach (Player bot in bots)
+            {
+                if (!qualifieds.Contains(bot))
+                {
+                    Destroy(bot.gameObject);
+                }
+            }
+
+            bots = qualifieds;
+
+            foreach (Player bot in bots)
+            {
+                if (bot.TryGetComponent(out AIController AI)) bot.GetComponent<AIController>().enabled = true;
+                if (bot.TryGetComponent(out CharacterController Cont)) bot.GetComponent<CharacterController>().enabled = true;
+                bot.gameObject.SetActive(false);
+            }
+
+            WinnerScreen();
+        }
+        else
         {
             if (qualifieds.Contains(Player.GetComponent<Player>()))
             {
@@ -172,8 +218,32 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void WinnerRequirements()
+    {
+        foreach (Player bot in bots)
+        {
+            bot.gameObject.SetActive(true);
+            if (bot.TryGetComponent(out AIController AI)) bot.GetComponent<AIController>().enabled = false;
+            if (bot.TryGetComponent(out CharacterController Cont)) bot.GetComponent<CharacterController>().enabled = false;
+
+            bot.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+
+        GameObject.Find("WinnerScreenManager").GetComponent<WinnerScreenManager>().Winner(bots[0]);
+    }
+
     public void GameEnd()
     {
+        if (!qualifieds.Contains(Player.GetComponent<Player>()))
+        {
+            Destroy(Player.gameObject);
+            Player = null;
+        }
+        foreach (Player bot in bots)
+        {
+            Destroy(bot.gameObject);
+        }
+
 
     }
 }

@@ -95,11 +95,12 @@ public class AIController : Player
 
     void Update()
     {
+
         if (SceneManager.GetActiveScene().name == "Elimination" || SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "RandomMap") return;
         if (transform.position.y < -10 && lastCheckpoint != null) transform.position = lastCheckpoint.transform.position;
-
-        CheckFinish();
         nameText.transform.LookAt(GameObject.Find("PlayerCamera(Clone)").transform);
+        CheckFinish();
+
 
         // Destination
         List<GameObject> foreDests = new();

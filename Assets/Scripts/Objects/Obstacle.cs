@@ -103,12 +103,12 @@ public class Obstacle : MonoBehaviour
         {
             if (axis == 'x')
             {
-                if (transform.localPosition.x >= firstPos.x && state == 1)
+                if (transform.localPosition.x >= firstPos.x && state != 2)
                 {
                     StartCoroutine(goTwo());
                     state = 0;
                 }
-                if (transform.localPosition.x <= lastPos.x && state == 2)
+                if (transform.localPosition.x <= lastPos.x && state != 1)
                 {
                     StartCoroutine(goOne());
                     state = 0;
@@ -116,12 +116,12 @@ public class Obstacle : MonoBehaviour
             }
             if (axis == 'z')
             {
-                if (transform.localPosition.z >= firstPos.z && state == 1)
+                if (transform.localPosition.z >= firstPos.z && state != 2)
                 {
                     StartCoroutine(goTwo());
                     state = 0;
                 }
-                if (transform.localPosition.z <= lastPos.z && state == 2)
+                if (transform.localPosition.z <= lastPos.z && state != 1)
                 {
                     StartCoroutine(goOne());
                     state = 0;
@@ -129,12 +129,12 @@ public class Obstacle : MonoBehaviour
             }
             if (axis == 'y')
             {
-                if (transform.localPosition.y >= firstPos.y && state == 1)
+                if (transform.localPosition.y >= firstPos.y && state != 2)
                 {
                     StartCoroutine(goTwo());
                     state = 0;
                 }
-                if (transform.localPosition.y <= lastPos.y && state == 2)
+                if (transform.localPosition.y <= lastPos.y && state != 1)
                 {
                     StartCoroutine(goOne());
                     state = 0;
@@ -145,6 +145,7 @@ public class Obstacle : MonoBehaviour
             if (state == 0) rb.velocity = Vector3.zero;
             if (state == 1) rb.velocity = (firstPos - transform.localPosition).normalized * speed * Time.fixedDeltaTime;
             if (state == 2) rb.velocity = (lastPos - transform.localPosition).normalized * speed * Time.fixedDeltaTime;
+
         }
 
         if (obstacleType == ObstacleType.Cannon)
@@ -164,13 +165,7 @@ public class Obstacle : MonoBehaviour
 
     IEnumerator goOne()
     {
-        if (minWait == 0)
-        {
-            yield return new WaitForEndOfFrame();
-            state = 1;
-            yield break;
-        }
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(Random.Range(minWait, maxWait));
         state = 1;
     }
     IEnumerator goTwo()

@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Elimination.unity
     guid: 20e7d529c8d553d44b4b12e13179e8e7
+  - enabled: 1
+    path: Assets/Scenes/Winner.unity
+    guid: 33b0cef805ba6a247b4c1908237b975b
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 0c47649835efb9941a57aa2c45d0916a,
       type: 2}

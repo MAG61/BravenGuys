@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8088072483032735364
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3370227215279726223, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 637949407474519127, guid: 43fcc2e585b497849ae1adf90e3307bd,
+        type: 3}
+    - target: {fileID: 3370227215279726223, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 6699446615349125189, guid: 43fcc2e585b497849ae1adf90e3307bd,
+        type: 3}
+    - target: {fileID: 3688339504569979909, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_Name
+      value: "Sar\u0131Kap\u0131"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551091035398385610, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551091035398385610, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551091035398385610, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.3751283
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551091035398385610, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551091035398385610, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071078
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551091035398385610, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551091035398385610, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071058
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551091035398385610, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551091035398385610, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551091035398385610, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551091035398385610, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643480738905859563, guid: 78be6b22336fc054e9ea9ad4e731ccfb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 6699446615349125189, guid: 43fcc2e585b497849ae1adf90e3307bd,
+        type: 3}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 78be6b22336fc054e9ea9ad4e731ccfb, type: 3}
