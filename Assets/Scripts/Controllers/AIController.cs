@@ -43,6 +43,7 @@ public class AIController : Player
 
     private GameObject nearestDest;
     public GameObject AIObject;
+    float lastDestTime;
 
     [Space(10)]
     [Header("Name")]
@@ -102,24 +103,34 @@ public class AIController : Player
         CheckFinish();
 
 
-        // Destination
-        List<GameObject> foreDests = new();
-        foreach (GameObject dest in destinations)
+        #region Destination
+        if (transform.position.z > currentDestination.transform.position.z || Time.time - lastDestTime > 10f)
         {
-            if (dest.transform.position.z > transform.position.z)
+            List<GameObject> foreDests = new();
+            foreach (GameObject dest in destinations)
             {
-                foreDests.Add(dest);
+                if (dest.transform.position.z > transform.position.z)
+                {
+                    foreDests.Add(dest);
+                }
             }
-        }
-        foreach (GameObject dest in foreDests)
-        {
-            if (nearestDest == null) nearestDest = dest;
+            foreach (GameObject dest in foreDests)
+            {
+                if (nearestDest == null) nearestDest = dest;
 
-            if (dest.transform.position.z < nearestDest.transform.position.z) nearestDest = dest;
+                if (dest.transform.position.z < nearestDest.transform.position.z && Mathf.Abs(dest.transform.position.x - transform.position.x) < 25f) nearestDest = dest;
+                if (dest.transform.position.z == nearestDest.transform.position.z && Mathf.Abs(dest.transform.position.x - transform.position.x) < 25f)
+                {
+                    int destint = Random.Range(1, 3);
+                    if (destint == 1) nearestDest = dest;
+                }
+            }
+            lastDestTime = Time.time;
+            currentDestination = nearestDest;
+            nearestDest = null;
+            StartCoroutine(resetDestination(currentDestination, transform.position));
         }
-        currentDestination = nearestDest;
-        nearestDest = null;
-        //
+        #endregion
     }
 
     private void OnTriggerStay(Collider other)
@@ -140,6 +151,11 @@ public class AIController : Player
         }
 
         currentDestination = destinations[0];
+
+        foreach (Collider col in FindObjectsOfType<Collider>())
+        {
+            if (col.sharedMaterial == ignore) Physics.IgnoreCollision(GetComponent<Collider>(), col, true);
+        }
     }
 
     private bool OnCorner()
@@ -152,4 +168,35 @@ public class AIController : Player
         return false;
     }
 
+    IEnumerator resetDestination(GameObject oldDest, Vector3 oldPos)
+    {
+        yield return new WaitForSeconds(4f);
+
+        if (oldDest == currentDestination && Vector3.Distance(oldPos, transform.position) < 15f)
+        {
+            List<GameObject> foreDests = new();
+            foreach (GameObject dest in destinations)
+            {
+                if (dest.transform.position.z > transform.position.z)
+                {
+                    foreDests.Add(dest);
+                }
+            }
+            foreach (GameObject dest in foreDests)
+            {
+                if (nearestDest == null) nearestDest = dest;
+
+                if (dest.transform.position.z < nearestDest.transform.position.z && Mathf.Abs(dest.transform.position.x - transform.position.x) < 25f) nearestDest = dest;
+                if (dest.transform.position.z == nearestDest.transform.position.z && Mathf.Abs(dest.transform.position.x - transform.position.x) < 25f)
+                {
+                    int destint = Random.Range(1, 3);
+                    if (destint == 1) nearestDest = dest;
+                }
+            }
+            lastDestTime = Time.time;
+            currentDestination = nearestDest;
+            nearestDest = null;
+        }
+
+    }
 }

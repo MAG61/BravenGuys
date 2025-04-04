@@ -23,22 +23,22 @@ PrefabInstance:
     - target: {fileID: 8570912213553302895, guid: 1f5bcb5a15528c34f8792330d47552b9,
         type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8570912213553302895, guid: 1f5bcb5a15528c34f8792330d47552b9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.58
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8570912213553302895, guid: 1f5bcb5a15528c34f8792330d47552b9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6541436
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8570912213553302895, guid: 1f5bcb5a15528c34f8792330d47552b9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8570912213553302895, guid: 1f5bcb5a15528c34f8792330d47552b9,
         type: 3}
@@ -78,7 +78,7 @@ PrefabInstance:
     - target: {fileID: 8889790606599228221, guid: 1f5bcb5a15528c34f8792330d47552b9,
         type: 3}
       propertyPath: m_Name
-      value: "Ye\u015FilDenge"
+      value: "Ye\u015FilDenge Variant"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

@@ -6,30 +6,33 @@ EditorUserSettings:
   serializedVersion: 4
   m_ConfigSettings:
     RecentlyUsedSceneGuid-0:
-      value: 5700000401510d085c0d592711775944154e1e7f287972657f2c4831e0e26069
+      value: 06055055550c0c085c570e7b467b0d4412164d78787f75647a2f496bb2b7353d
       flags: 0
     RecentlyUsedSceneGuid-1:
-      value: 51030d515d075d5e5e0c0f7746715e444e154c78757e2032787a4d60e4b43239
-      flags: 0
-    RecentlyUsedSceneGuid-2:
-      value: 0250015100035e5e5f0d087045730c4415154a7f7d2a75682c794837b1b7616c
-      flags: 0
-    RecentlyUsedSceneGuid-3:
-      value: 5101515101005b020e56087745705b4442154c287d7a23617e784a6ae7b8316f
-      flags: 0
-    RecentlyUsedSceneGuid-4:
-      value: 5002565606500f035d5b0e2346220d4441154c297d7176687f7a4a31bbb7613a
-      flags: 0
-    RecentlyUsedSceneGuid-5:
       value: 000300035306585f5d0d5e2346250e44424f1e2f7a7f7e367a2c1b63b4e66c39
       flags: 0
-    RecentlyUsedSceneGuid-6:
-      value: 570103505d025b5a0f0f0a7044720d44134e402b2a7e756829781967e6b06360
-      flags: 0
-    RecentlyUsedSceneGuid-7:
+    RecentlyUsedSceneGuid-2:
       value: 00090156005051585e0c5d7613200744434e1d7d29797e66757c4a30e4b5626f
       flags: 0
+    RecentlyUsedSceneGuid-3:
+      value: 570103505d025b5a0f0f0a7044720d44134e402b2a7e756829781967e6b06360
+      flags: 0
+    RecentlyUsedSceneGuid-4:
+      value: 00520403070c0a0a5e0b5a7745225944134e1d797b7e7f622b281c35b1b96069
+      flags: 0
+    RecentlyUsedSceneGuid-5:
+      value: 5255575751070d5a08085c7516765e4447154e7e2a2b2231752c4f6bb2b3313d
+      flags: 0
+    RecentlyUsedSceneGuid-6:
+      value: 5354565753515f58555d59214770094443164d2b2a2b7463752b1c6be7e4656b
+      flags: 0
+    RecentlyUsedSceneGuid-7:
+      value: 0605000704070b5f5d0f097242200b44404e48722d7b71622e711b67e4e23061
+      flags: 0
     RecentlyUsedSceneGuid-8:
+      value: 0703030701545e0b0c5a542440710b441716407c7c707f34752c4d64b6b06339
+      flags: 0
+    RecentlyUsedSceneGuid-9:
       value: 520906075456500c5d5e58771227594412161b2e297f7333747d1e65e3b66c3c
       flags: 0
     UnityRemoteDevice:

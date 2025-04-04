@@ -14,11 +14,14 @@ public class RandomMapSelect : MonoBehaviour
     public string selectedScene;
     public float turnSpeed;
     private Rigidbody slot;
+    private bool controlB = false;
 
     void Start()
     {
+        StartCoroutine(control());
         slot = GameObject.Find("Slot").GetComponent<Rigidbody>();
         slot.AddForce(new Vector3(0, Random.Range(turnSpeed - 2000, turnSpeed + 2000), 0), ForceMode.Impulse);
+
         foreach (SpriteRenderer slot in slots)
         {
             string slotMap = scenes[Random.Range(0, scenes.Length)];
@@ -33,7 +36,7 @@ public class RandomMapSelect : MonoBehaviour
 
     private void Update()
     {
-        if (slot.velocity.y > -1.5f)
+        if (slot.velocity.y > -3f && controlB)
         {
             slot.transform.DetachChildren();
             foreach (SpriteRenderer slot in slots)
@@ -58,5 +61,11 @@ public class RandomMapSelect : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         GameManager.instance.SetMap(selectedScene);
+    }
+
+    IEnumerator control()
+    {
+        yield return new WaitForSeconds(1.5f);
+        controlB = true;
     }
 }

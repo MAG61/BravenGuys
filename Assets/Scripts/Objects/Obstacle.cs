@@ -23,6 +23,7 @@ public class Obstacle : MonoBehaviour
     [SerializeField] private float maxAngle;
     [SerializeField] private float turnSpeed;
     private bool goinFirst = true;
+    private bool canGo = true;
 
     [SerializeField] private Transform muzzle;
     [SerializeField] private float power;
@@ -101,40 +102,40 @@ public class Obstacle : MonoBehaviour
 
         if (obstacleType == ObstacleType.Pos2Pos)
         {
-            if (axis == 'x')
+            if (axis == 'x' && canGo)
             {
                 if (transform.localPosition.x >= firstPos.x && state != 2)
                 {
                     StartCoroutine(goTwo());
                     state = 0;
                 }
-                if (transform.localPosition.x <= lastPos.x && state != 1)
+                else if (transform.localPosition.x <= lastPos.x && state != 1)
                 {
                     StartCoroutine(goOne());
                     state = 0;
                 }
             }
-            if (axis == 'z')
+            if (axis == 'z' && canGo)
             {
                 if (transform.localPosition.z >= firstPos.z && state != 2)
                 {
                     StartCoroutine(goTwo());
                     state = 0;
                 }
-                if (transform.localPosition.z <= lastPos.z && state != 1)
+                else if (transform.localPosition.z <= lastPos.z && state != 1)
                 {
                     StartCoroutine(goOne());
                     state = 0;
                 }
             }
-            if (axis == 'y')
+            if (axis == 'y' && canGo)
             {
                 if (transform.localPosition.y >= firstPos.y && state != 2)
                 {
                     StartCoroutine(goTwo());
                     state = 0;
                 }
-                if (transform.localPosition.y <= lastPos.y && state != 1)
+                else if (transform.localPosition.y <= lastPos.y && state != 1)
                 {
                     StartCoroutine(goOne());
                     state = 0;
@@ -143,8 +144,8 @@ public class Obstacle : MonoBehaviour
 
 
             if (state == 0) rb.velocity = Vector3.zero;
-            if (state == 1) rb.velocity = (firstPos - transform.localPosition).normalized * speed * Time.fixedDeltaTime;
-            if (state == 2) rb.velocity = (lastPos - transform.localPosition).normalized * speed * Time.fixedDeltaTime;
+            if (state == 1) rb.velocity = ((firstPos - transform.localPosition).normalized) * speed * Time.fixedDeltaTime;
+            if (state == 2) rb.velocity = ((lastPos - transform.localPosition).normalized) * speed * Time.fixedDeltaTime;
 
         }
 
@@ -165,13 +166,17 @@ public class Obstacle : MonoBehaviour
 
     IEnumerator goOne()
     {
+        canGo = false;
         yield return new WaitForSeconds(Random.Range(minWait, maxWait));
         state = 1;
+        canGo = true;
     }
     IEnumerator goTwo()
     {
+        canGo = false;
         yield return new WaitForSeconds(Random.Range(minWait, maxWait));
         state = 2;
+        canGo = true;
     }
 
     IEnumerator reloadCannon()

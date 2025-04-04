@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null) instance = this;
-        if (instance != this) Destroy(this);
+        if (instance != this) Destroy(this.gameObject);
         DontDestroyOnLoad(this);
     }
     void Start()
@@ -98,18 +98,11 @@ public class GameManager : MonoBehaviour
 
     public void GoMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
-
-        foreach (Player bot in bots)
-        {
-            Destroy(bot.gameObject);
-        }
-        if (Player != null) Destroy(Player.gameObject);
-
-        qualifieds.Clear();
-        bots.Clear();
+        qualifieds = new();
+        bots = new();
         currentMap = null;
         Player = null;
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void SelectRandomMap() { SceneManager.LoadScene("RandomMap"); }
@@ -190,6 +183,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 GameEnd();
+                return;
             }
             foreach (Player bot in bots)
             {
@@ -243,7 +237,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(bot.gameObject);
         }
-
+        LoserScreen();
 
     }
 }

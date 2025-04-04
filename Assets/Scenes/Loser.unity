@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c799e5a5334d2c9419fa887ca95e8784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taptext: {fileID: 1758849553}
 --- !u!4 &47955982
 Transform:
   m_ObjectHideFlags: 0

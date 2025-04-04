@@ -119,11 +119,17 @@ public class CharacterController : Player
         isDoubleClick = false;
     }
 
-
+    public void PlayerJump()
+    {
+        if (canJump)
+        {
+            Jump();
+        }
+    }
 
     private bool OnCorner()
     {
-        if (Physics.Raycast(cornerRaycastPos.position, cornerRaycastPos.TransformDirection(Vector3.back), out cornerHit, 25f))
+        if (Physics.Raycast(cornerRaycastPos.position, cornerRaycastPos.TransformDirection(Vector3.back), out cornerHit, 15f))
         {
             return true;
         }
@@ -140,5 +146,10 @@ public class CharacterController : Player
         locationSlider.maxValue = GameObject.FindGameObjectWithTag("Finish").transform.position.z;
 
         cameraCont = GameObject.Find("PlayerCamera(Clone)").GetComponent<CameraController>();
+
+        foreach (Collider col in FindObjectsOfType<Collider>())
+        {
+            if (col.sharedMaterial == ignore) Physics.IgnoreCollision(GetComponent<Collider>(), col, true);
+        }
     }
 }

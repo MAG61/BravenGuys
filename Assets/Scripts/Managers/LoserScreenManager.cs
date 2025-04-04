@@ -5,6 +5,8 @@ using TMPro;
 
 public class LoserScreenManager : MonoBehaviour
 {
+    public GameObject taptext;
+
     void Start()
     {
         StartCoroutine(tapText());   
@@ -12,7 +14,7 @@ public class LoserScreenManager : MonoBehaviour
 
     void Update()
     {
-        if (GameObject.Find("TapText").activeSelf && Input.touchCount > 0)
+        if (taptext.activeSelf && Input.touchCount > 0)
         {
             GameManager.instance.GoMainMenu();
         }
@@ -21,6 +23,6 @@ public class LoserScreenManager : MonoBehaviour
     IEnumerator tapText()
     {
         yield return new WaitForSeconds(3f);
-        GameObject.Find("TapText").SetActive(true);
+        taptext.SetActive(true);
     }
 }

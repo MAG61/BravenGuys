@@ -11,22 +11,22 @@ PrefabInstance:
     - target: {fileID: 332458310472883351, guid: e30f44c51b6056248b5f694b32867c95,
         type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 332458310472883351, guid: e30f44c51b6056248b5f694b32867c95,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.58
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 332458310472883351, guid: e30f44c51b6056248b5f694b32867c95,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6541436
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 332458310472883351, guid: e30f44c51b6056248b5f694b32867c95,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 332458310472883351, guid: e30f44c51b6056248b5f694b32867c95,
         type: 3}
@@ -66,7 +66,12 @@ PrefabInstance:
     - target: {fileID: 662661750592215749, guid: e30f44c51b6056248b5f694b32867c95,
         type: 3}
       propertyPath: m_Name
-      value: PembeDenge
+      value: PembeDenge Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2518983068745328319, guid: e30f44c51b6056248b5f694b32867c95,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -1.79
       objectReference: {fileID: 0}
     - target: {fileID: 6276963026775547254, guid: e30f44c51b6056248b5f694b32867c95,
         type: 3}

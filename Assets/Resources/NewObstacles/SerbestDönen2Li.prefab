@@ -116,7 +116,7 @@ Transform:
   - {fileID: 6742151441218263260}
   - {fileID: 3149490406054520775}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3124231372417368321
 GameObject:
@@ -384,7 +384,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 5
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.4
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
